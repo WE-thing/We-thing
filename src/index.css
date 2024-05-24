@@ -1,4 +1,47 @@
-:root {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "NanumMyeongjo";
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjo.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjo.eot?#iefix)
+        format("embedded-opentype"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjo.woff)
+        format("woff"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjo.ttf)
+        format("truetype");
+  }
+
+  @font-face {
+    font-family: "NanumMyeongjoBold";
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoBold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoBold.eot?#iefix)
+        format("embedded-opentype"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoBold.woff)
+        format("woff"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoBold.ttf)
+        format("truetype");
+  }
+
+  @font-face {
+    font-family: "NanumMyeongjoExtraBold";
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoExtraBold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoExtraBold.eot?#iefix)
+        format("embedded-opentype"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoExtraBold.woff)
+        format("woff"),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumMyeongjo/NanumMyeongjoExtraBold.ttf)
+        format("truetype");
+  }
+
+  @font-face {
+    font-family: "Continuous";
+    src: "/src/assets/font/continuous.oft";
+  }
+}
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -65,4 +108,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

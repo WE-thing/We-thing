@@ -1,7 +1,14 @@
+// import "./index.css";
+
+import StyleTest from "./StyleTest";
+
 function App() {
+  const name = "name";
   return (
     <>
-      <h1>hi</h1>
+      <div>
+        <StyleTest />
+      </div>
     </>
   );
 }
