@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <div>
-        {/* <StyleTest /> */}
+        <StyleTest />
         <TabList />
       </div>
     </>
