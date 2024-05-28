@@ -13,7 +13,6 @@ export default function GuestBook() {
   });
 
   const handleSubmit = async () => {
-    console.log(formData);
     try {
       await axios.post("/api/user/signup", formData);
     } catch (error) {

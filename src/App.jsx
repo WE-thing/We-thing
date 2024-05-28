@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./main-router";
 import Contact from "./components/contact/Contact";
 import GuestBook from "./components/gusetbook/GuestBook";
+import Schedule from "./components/schedule/Schedule";
 import TabList from "./components/tabList/TabList";
 import WeddingGift from "./components/weddinggift/WeddingGift";
 
