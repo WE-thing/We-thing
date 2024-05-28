@@ -3,16 +3,19 @@ import axios from "axios";
 
 export default function GuestBook() {
   const [formData, setFormData] = useState({
-    name: "",
+    id: 5,
+    userName: "",
     phoneNumber: "",
+    roleId: 3,
     relationshipNumber: 1, //1신랑 2신부
     relationshipString: "",
     attend: 1, // 1참석 2불참 3미정
   });
 
   const handleSubmit = async () => {
+    console.log(formData);
     try {
-      await axios.post("/api/guestbook", formData);
+      await axios.post("/api/user/signup", formData);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -68,7 +71,7 @@ export default function GuestBook() {
             <input
               type="text"
               placeholder="이름"
-              name="name"
+              name="userName"
               className="mt-1
               block
               w-full
@@ -81,7 +84,7 @@ export default function GuestBook() {
               shadow-sm
               placeholder-slate-400
              "
-              value={formData.name}
+              value={formData.userName}
               onChange={handleChange}
             />
             <input
