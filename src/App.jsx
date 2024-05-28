@@ -2,6 +2,7 @@
 import StyleTest from "./StyleTest";
 import Contact from "./components/contact/Contact";
 import GuestBook from "./components/gusetbook/GuestBook";
+import Schedule from "./components/schedule/Schedule";
 import TabList from "./components/tabList/TabList";
 import WeddingGift from "./components/weddinggift/WeddingGift";
 
