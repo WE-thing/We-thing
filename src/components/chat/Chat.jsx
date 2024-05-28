@@ -1,41 +1,41 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 
 import { io } from "socket.io-client";
 
 const socket = io.connect("http://localhost:3001", {
   cors: { origin: "*" },
+  autoConnect: true,
 });
 
 export default function Chat() {
-  const [message, setMessage] = useState([]);
+  // TODO: url의 path에서 가져오기
+  const invitationId = "665524e6c68f0422a6d70e7e";
+  const [messageList, setMessageList] = useState([]);
   const messageInputRef = useRef(null);
 
   const handleSendMessage = () => {
     const message = messageInputRef.current.value;
-    console.log(message);
-    socket.emit("message", message);
+    socket.emit("room:msg", invitationId, message);
     messageInputRef.current.value = ""; // 메시지 전송 후 입력 필드 초기화
   };
 
-  socket.on("connect", () => {
-    console.log("connect success...");
-  });
-
-  socket.on("msg:received", (message) => {
-    console.log(message);
-  });
+  useEffect(() => {
+    socket.emit("room:join", invitationId);
+  }, []);
 
   useEffect(() => {
-    socket.on("message", (message) => {
+    socket.on("msg:received", (message) => {
       console.log("받은 메세지", message);
-      setMessage((prev) => [...prev, message]);
+      setMessageList((prev) => [...prev, message]);
     });
   }, []);
 
   return (
     <div className="relative w-full h-full ">
-      {message}
+      {messageList.map((message, id) => (
+        <div key={id}>{message}</div>
+      ))}
       <div className="grid grid-cols-6 fixed bottom-0 left-0 right-0 h-14 bg-red-50 shadow-[rgba(0,0,15,0.1)_0px_0px_14px_0px]">
         <input
           type="text"
