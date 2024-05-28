@@ -11,12 +11,13 @@ const socket = io.connect("http://localhost:3001", {
 export default function Chat() {
   // TODO: url의 path에서 가져오기
   const invitationId = "665524e6c68f0422a6d70e7e";
+  const userId = "6654125c801f4c8fbae888d6";
   const [messageList, setMessageList] = useState([]);
   const messageInputRef = useRef(null);
 
   const handleSendMessage = () => {
     const message = messageInputRef.current.value;
-    socket.emit("room:msg", invitationId, message);
+    socket.emit("room:msg", { roomId: invitationId, userId, message });
     messageInputRef.current.value = ""; // 메시지 전송 후 입력 필드 초기화
   };
 
@@ -29,6 +30,9 @@ export default function Chat() {
       console.log("받은 메세지", message);
       setMessageList((prev) => [...prev, message]);
     });
+    return () => {
+      socket.off("msg:received");
+    };
   }, []);
 
   return (
