@@ -1,15 +1,24 @@
 import React from "react";
-import Photos from "../../lib/modules/Photos";
+import AlbumPhotos from "../../lib/modules/AlbumPhotos";
 
-export default function Gallery({invitation}) {
+export default function Gallery({ invitation }) {
   return (
     <div className="text-center bg-theme1-primary w-full p-5 pb-12">
       <p className="font-continuous text-heading2 text-darkGray my-10">
         Gallery
       </p>
-      <Photos
-        link={"/src/assets/images/weddingphoto"}
-        format={"jpeg"}
+      <AlbumPhotos
+        picUrls={[
+          "/src/assets/images/weddingphoto1.jpeg",
+          "/src/assets/images/weddingphoto2.jpeg",
+          "/src/assets/images/weddingphoto3.jpeg",
+          "/src/assets/images/weddingphoto4.jpeg",
+          "/src/assets/images/weddingphoto5.jpeg",
+          "/src/assets/images/weddingphoto6.jpeg",
+          "/src/assets/images/weddingphoto7.jpeg",
+          "/src/assets/images/weddingphoto8.jpeg",
+          "/src/assets/images/weddingphoto1.jpeg",
+        ]}
         start={1}
         end={9}
       />

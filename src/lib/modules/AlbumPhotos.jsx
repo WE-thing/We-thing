@@ -49,9 +49,8 @@ export default function AlbumPhotos({ picUrls, start, end }) {
         onHide={handleClose}
         centered
       >
-        <Modal.Header closeButton></Modal.Header>
         <Modal.Body style={{ padding: 0 }}>
-          <img src={modalImgUrl}/>
+          <img src={modalImgUrl} />
         </Modal.Body>
       </Modal>
     </div>
