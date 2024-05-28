@@ -1,7 +1,11 @@
 import React from "react";
+import Photos from "../../lib/modules/Photos";
+import { getAlbumList, postAlbum } from "../../lib/apis/album";
 
 export default function SharedAlbum() {
-// 사진들을 불러와서 배열에 띄울 거에요
+// api 요청은 "../../lib/apis"에서 불러올 거에요 !
+
+// 사진들을 불러와서 배열에 띄울 거에요 -> 띄울 때는 Photos를 사용할거에요
 // GET /album/:id 뭐 이런거 하겠죠?
 // 불러온 사진 목록을 state에 넣으면 될 것 같아요
 
