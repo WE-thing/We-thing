@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import MainPage from "./routes/MainPage";
+import MainPage from "./routes/MainPage";
 import InvitationCreatePage from "./routes/InvitationCreatePage";
 import InvitationPage from "./routes/InvitationPage";
 
