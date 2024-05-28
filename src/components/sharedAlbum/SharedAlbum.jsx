@@ -5,15 +5,14 @@ import { getAlbumList, postAlbum } from "../../lib/apis/album";
 
 export default function SharedAlbum() {
   const [photoList, setPhotoList] = useState([]);
-  const [userId, setUserId] = useState(2);
+  const [userId, setUserId] = useState("2");
 
   // 사진들을 불러와서 배열에 띄울 거에요 -> 띄울 때는 AlbumPhotos를 사용할거에요
   // GET /album/:id 뭐 이런거 하겠죠?
   // 불러온 사진 목록을 state에 넣으면 될 것 같아요
   useEffect(() => {
     getAlbumList({ userId: userId }).then((data) => {
-      console.log(data);
-      setPhotoList(JSON.parse(data.imageUrl));
+      setPhotoList(JSON.parse(data[0].imageUrl));
     });
   }, []);
 
