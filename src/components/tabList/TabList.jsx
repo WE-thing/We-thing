@@ -23,11 +23,7 @@ export default function TabList() {
 
   return (
     <div>
-<<<<<<< HEAD
       <div className="text-subheading text-theme1-black font-nanum h-[72px] grid grid-cols-4 text-center items-center bg-white">
-=======
-      <div className=" h-[72px] text-subheading text-theme1-black font-nanum grid grid-cols-4 text-center items-center bg-white">
->>>>>>> e465787f440fe34569d0490f6391ea828e9dd65c
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -40,11 +36,10 @@ export default function TabList() {
           </button>
         ))}
       </div>
-<<<<<<< HEAD
-      <div className={`w-full h-full min-h-[calc(100vh-72px)]`}>
-=======
-      <div className={`h-[80vh] overflow-y-scroll w-full p-5`}>
->>>>>>> e465787f440fe34569d0490f6391ea828e9dd65c
+
+      <div
+        className={`w-full h-full min-h-[calc(100vh-72px)] overflow-y-scroll`}
+      >
         {renderContent()}
       </div>
     </div>
