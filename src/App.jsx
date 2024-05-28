@@ -1,5 +1,7 @@
 // import "./index.css";
 import StyleTest from "./StyleTest";
+import { RouterProvider } from "react-router-dom";
+import router from "./main-router";
 import Contact from "./components/contact/Contact";
 import GuestBook from "./components/gusetbook/GuestBook";
 import TabList from "./components/tabList/TabList";
@@ -9,13 +11,7 @@ function App() {
   const name = "name";
   return (
     <>
-      <div>
-        {/* <StyleTest /> */}
-        <Contact />
-        <GuestBook />
-        <WeddingGift />
-        <TabList />
-      </div>
+      <RouterProvider router={router} />
     </>
   );
 }
