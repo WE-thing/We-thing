@@ -3,16 +3,19 @@ import axios from "axios";
 
 export default function GuestBook() {
   const [formData, setFormData] = useState({
-    name: "",
+    id: 5,
+    userName: "",
     phoneNumber: "",
+    roleId: 3,
     relationshipNumber: 1, //1신랑 2신부
     relationshipString: "",
     attend: 1, // 1참석 2불참 3미정
   });
 
   const handleSubmit = async () => {
+    console.log(formData);
     try {
-      await axios.post("/api/guestbook", formData);
+      await axios.post("/api/user/signup", formData);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -25,14 +28,16 @@ export default function GuestBook() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className=" text-heading2 text-theme1-black font-continuous">
+    <div className="w-full h-[700px] p-4 box-border bg-white">
+      <div className=" mt-8 text-heading2 text-theme1-black font-continuous flex items-center justify-center">
         GuestBook
       </div>
-      <div className=" mt-4">신랑&신부에게 참석 의사 전달하기</div>
+      <div className=" mt-4 text-theme1-black font-nanum text-center">
+        신랑&신부에게 참석 의사 전달하기
+      </div>
 
-      <div className="mt-12 flex flex-row justify-between w-3/4">
-        <div>
+      <div className="flex justify-around w-[300px] my-[50px] mx-auto">
+        <div className="text-theme1-black font-nanum text-center">
           <input
             id="sinlang"
             class="peer/sinlang"
@@ -42,11 +47,11 @@ export default function GuestBook() {
             value={1}
             onChange={handleChange}
           />
-          <label for="sinlang" class="peer-checked/sinlang:">
+          <label for="sinlang" class="peer-checked/sinlang: ml-2">
             신랑측 손님
           </label>
         </div>
-        <div>
+        <div className="text-theme1-black font-nanum text-center">
           <input
             id="sinbu"
             class="peer/sinbu"
@@ -55,7 +60,7 @@ export default function GuestBook() {
             value={2}
             onChange={handleChange}
           />
-          <label for="sinbu" class="peer-checked/sinbu:">
+          <label for="sinbu" class="peer-checked/sinbu: ml-2">
             신부측 손님
           </label>
         </div>
@@ -66,7 +71,7 @@ export default function GuestBook() {
             <input
               type="text"
               placeholder="이름"
-              name="name"
+              name="userName"
               className="mt-1
               block
               w-full
@@ -79,7 +84,7 @@ export default function GuestBook() {
               shadow-sm
               placeholder-slate-400
              "
-              value={formData.name}
+              value={formData.userName}
               onChange={handleChange}
             />
             <input
@@ -123,7 +128,7 @@ export default function GuestBook() {
           </label>
         </form>
       </div>
-      <div className="mt-12 flex flex-col w-3/4 ">
+      <div className="mt-12 flex flex-col w-3/4 text-theme1-black font-nanum">
         <div className="py-2">
           <input
             id="ans1"
@@ -134,7 +139,7 @@ export default function GuestBook() {
             value={1}
             onChange={handleChange}
           />
-          <label for="ans1" class="peer-checked/ans1:">
+          <label for="ans1" class="peer-checked/ans1: ml-2">
             참석합니다.
           </label>
         </div>
@@ -147,7 +152,7 @@ export default function GuestBook() {
             value={2}
             onChange={handleChange}
           />
-          <label for="ans2" class="peer-checked/ans2:">
+          <label for="ans2" class="peer-checked/ans2: ml-2">
             마음으로 함께하겠습니다.
           </label>
         </div>
@@ -160,14 +165,14 @@ export default function GuestBook() {
             value={3}
             onChange={handleChange}
           />
-          <label for="ans3" class="peer-checked/ans3:">
+          <label for="ans3" class="peer-checked/ans3: ml-2">
             아직 정해지지 않았습니다.
           </label>
         </div>
       </div>
-      <div>
+      <div className="flex items-center justify-center">
         <button
-          className="mt-12 px-12 py-3 rounded-full bg-rose-200"
+          className="mt-6 px-12 py-2 rounded-full bg-theme1-pink font-nanum text-white"
           onClick={handleSubmit}
         >
           제출
