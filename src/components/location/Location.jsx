@@ -1,7 +1,7 @@
 import React from "react";
 import { MdOutlineContentCopy } from "react-icons/md";
 
-export default function Location() {
+export default function Location({invitation}) {
   const copyToClipboard = async (text) => {
     await navigator.clipboard.writeText(text);
   };
@@ -21,11 +21,11 @@ export default function Location() {
       />
 
       <div className="text-center font-nanum text-subheading mb-2">
-        아펠가모 광화문 B2 로스타노홀
+        {invitation.locationName}
         <br />
         <div className="mt-3">
           <span className="flex justify-center text-body1 items-center">
-            {address}
+          {invitation.locationAddress}
             <MdOutlineContentCopy
               className="ml-2 cursor-pointer"
               style={{ color: "#848484" }}
@@ -35,7 +35,7 @@ export default function Location() {
         </div>
         <div className="text-center font-nanum text-body1">
           <span className="flex justify-center itext-body items-center">
-            {phone}
+            {invitation.locationContact}
             <MdOutlineContentCopy
               className="ml-2 cursor-pointer"
               style={{ color: "#848484" }}

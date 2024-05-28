@@ -30,6 +30,9 @@ export default {
         lightGray: "#F9F9F9",
         white: "#FFFFFF",
       },
+      spacing: {
+        8.75: "35px", // 사용자 정의 스페이싱 추가
+      },
     },
   },
   plugins: [],
