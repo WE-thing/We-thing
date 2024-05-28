@@ -3,7 +3,7 @@ import AlbumPhotos from "../../lib/modules/AlbumPhotos";
 
 export default function Gallery({ invitation }) {
   return (
-    <div className="text-center bg-theme1-primary w-full p-5 pb-12">
+    <div className="text-center bg-theme1-primary w-full p-[20px] pb-12">
       <p className="font-continuous text-heading2 text-darkGray my-10">
         Gallery
       </p>

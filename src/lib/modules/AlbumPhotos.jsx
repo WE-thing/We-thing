@@ -23,7 +23,7 @@ export default function AlbumPhotos({ picUrls, start, end }) {
       {rows.map((row, rowIndex) => (
         <div
           key={rowIndex}
-          className="photo-row flex justify-center mb-3 gap-3"
+          className="photo-row  flex justify-center mb-1 gap-1"
         >
           {row.map((src, index) => (
             <div
