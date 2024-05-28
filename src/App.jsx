@@ -7,6 +7,7 @@ import GuestBook from "./components/gusetbook/GuestBook";
 import Schedule from "./components/schedule/Schedule";
 import TabList from "./components/tabList/TabList";
 import WeddingGift from "./components/weddinggift/WeddingGift";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const name = "name";
