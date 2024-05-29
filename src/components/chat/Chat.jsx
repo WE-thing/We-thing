@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { getMessageList } from "../../lib/apis/chat";
 import ChatMessage from "./ChatMessage";
+import useAuth from "../../hook/useAuth";
 
 const socket = io.connect("http://localhost:3001", {
   cors: { origin: "*" },
@@ -12,17 +13,23 @@ const socket = io.connect("http://localhost:3001", {
 });
 
 export default function Chat() {
-  // TODO: url의 path에서 가져오기
   const { id: invitationId } = useParams();
-  const userId = window.localStorage.getItem("userId");
+  const { token, handleShow, LoginModal } = useAuth();
   const [messageList, setMessageList] = useState([]);
   const messageListRef = useRef(null);
   const messageInputRef = useRef(null);
 
   const handleSendMessage = () => {
     const message = messageInputRef.current.value;
-    socket.emit("room:msg", { roomId: invitationId, userId, message });
+    socket.emit("room:msg", { roomId: invitationId, token, message });
     messageInputRef.current.value = "";
+  };
+
+  const handleLogin = async () => {
+    if (!token) {
+      handleShow();
+      messageInputRef.current.blur();
+    }
   };
 
   useEffect(() => {
@@ -39,7 +46,6 @@ export default function Chat() {
 
   useEffect(() => {
     socket.on("msg:received", (message) => {
-      console.log("받은 메세지", message);
       setMessageList((prev) => [...prev, message]);
     });
     return () => {
@@ -66,6 +72,7 @@ export default function Chat() {
           onKeyDown={(e) => {
             if (e.key === "Enter") handleSendMessage();
           }}
+          onFocus={handleLogin}
         />
         <button
           onClick={handleSendMessage}
@@ -74,6 +81,7 @@ export default function Chat() {
           <BsFillSendFill size={20} />
         </button>
       </div>
+      <LoginModal />
     </div>
   );
 }
