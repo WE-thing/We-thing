@@ -16,21 +16,23 @@ export default function Chat() {
   const { id: invitationId } = useParams();
   const userId = window.localStorage.getItem("userId");
   const [messageList, setMessageList] = useState([]);
+  const messageListRef = useRef(null);
   const messageInputRef = useRef(null);
 
   const handleSendMessage = () => {
     const message = messageInputRef.current.value;
     socket.emit("room:msg", { roomId: invitationId, userId, message });
-    messageInputRef.current.value = ""; // 메시지 전송 후 입력 필드 초기화
+    messageInputRef.current.value = "";
   };
 
   useEffect(() => {
-    console.log("invitationId", invitationId);
-    console.log("userId", userId);
-    socket.emit("room:join", invitationId);
+    // 입력후 새로운 메세지가 보이도록 스크롤을 아래로 내려준다
+    messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  }, [messageList]);
 
+  useEffect(() => {
+    socket.emit("room:join", invitationId);
     getMessageList({ invitationId }).then((result) => {
-      console.log("msgList ", result);
       setMessageList(result);
     });
   }, []);
@@ -47,9 +49,11 @@ export default function Chat() {
 
   return (
     <div className="w-full h-full overflow-y-hidden">
-      <div className="w-full h-[calc(100vh-72px-56px)] overflow-y-auto over ">
+      <div
+        ref={messageListRef}
+        className="w-full h-[calc(100vh-72px-56px)] overflow-y-auto"
+      >
         {messageList.map((message, id) => (
-          // <div>{message.content}</div>
           <ChatMessage key={id} message={message} />
         ))}
       </div>
@@ -59,6 +63,9 @@ export default function Chat() {
           ref={messageInputRef}
           placeholder="메세지 입력"
           className="h-full col-span-5 px-4"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSendMessage();
+          }}
         />
         <button
           onClick={handleSendMessage}
