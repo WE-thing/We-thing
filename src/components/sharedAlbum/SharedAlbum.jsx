@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import AlbumPhotos from "../../lib/modules/AlbumPhotos";
 // api 요청은 "../../lib/apis"에서 불러올 거에요 !
-import { getAlbumList, postAlbum } from "../../lib/apis/album";
+import { getAlbumList, postAlbum, getImage } from "../../lib/apis/album";
 import { HiPlusCircle } from "react-icons/hi2";
 import { MdDownloadForOffline } from "react-icons/md";
+import JSZip from "jszip";
+import { saveAs } from "file-saver";
 
 export default function SharedAlbum() {
   const [photoList, setPhotoList] = useState([]);
@@ -24,7 +26,7 @@ export default function SharedAlbum() {
   // 기기의 앨범을 띄워서 사진을 고르게 할거에요
   const fileInputRef = useRef(null);
 
-  const handleButtonClick = () => {
+  const handleUploadButtonClick = () => {
     fileInputRef.current.click();
   };
 
@@ -44,6 +46,25 @@ export default function SharedAlbum() {
   // 다운로드 버튼이 있어요 -> 사진을 다운로드 할 거에요 우와
   // 어떻게 하는지는 아직은 모르겠어요 앞으로 배워갑시다
 
+  const handleDownloadButtonClick = async () => {
+    const zip = new JSZip();
+    const imgFolder = zip.folder("images");
+
+    const fetchImage = async (url) => {
+      const response = await getImage({url});
+      return response;
+    };
+
+    for (let url of photoList) {
+      const blob = await fetchImage(JSON.stringify(url));
+      const filename = url.split("/").pop();
+      imgFolder.file(filename, blob);
+    }
+
+    const content = await zip.generateAsync({ type: "blob" });
+    saveAs(content, "images.zip");
+  };
+
   return (
     <div>
       {/* 숨겨진 파일 입력 요소 */}
@@ -57,11 +78,12 @@ export default function SharedAlbum() {
       />
       <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
       <MdDownloadForOffline
+        onClick={handleDownloadButtonClick}
         className={`fixed bottom-20 right-5 z-50`}
         style={{ width: "44px", height: "44px", color: "#9E9C95" }}
       />
       <HiPlusCircle
-        onClick={handleButtonClick}
+        onClick={handleUploadButtonClick}
         className={`fixed bottom-5 right-5 z-50`}
         style={{ width: "44px", height: "44px", color: "#9E9C95" }}
       />

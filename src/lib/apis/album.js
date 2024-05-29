@@ -13,3 +13,8 @@ export async function postAlbum({userId, formData}) {
     });
     return resp.data;
 }
+
+export async function getImage({url}) {
+    const resp = await axios.get(url, {responseType:'blob'});
+    return resp.data;
+}
