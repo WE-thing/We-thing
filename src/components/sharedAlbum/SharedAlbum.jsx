@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import AlbumPhotos from "../../lib/modules/AlbumPhotos";
 // api 요청은 "../../lib/apis"에서 불러올 거에요 !
 import { getAlbumList, postAlbum } from "../../lib/apis/album";
+import { HiPlusCircle } from "react-icons/hi2";
+import { MdDownloadForOffline } from "react-icons/md";
 
 export default function SharedAlbum() {
   const [photoList, setPhotoList] = useState([]);
-  const [userId, setUserId] = useState("2");
+  const [userId, setUserId] = useState("3");
 
   // 사진들을 불러와서 배열에 띄울 거에요 -> 띄울 때는 AlbumPhotos를 사용할거에요
   // GET /album/:id 뭐 이런거 하겠죠?
@@ -29,6 +31,9 @@ export default function SharedAlbum() {
   return (
     <div>
       <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
+      <MdDownloadForOffline className={`fixed bottom-20 right-5 z-50`} style={{width:"44px", height:"44px", color:"#9E9C95"}}/>
+      <HiPlusCircle className={`fixed bottom-5 right-5 z-50`} style={{width:"44px", height:"44px", color:"#9E9C95"}}/>
     </div>
   );
 }
+
