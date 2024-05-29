@@ -12,9 +12,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const name = "name";
   return (
-    <>
+    <div className="bg-[lightgray]">
       <RouterProvider router={router} />
-    </>
+    </div>
   );
 }
 
