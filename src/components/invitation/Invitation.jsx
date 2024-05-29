@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Invitation({invitation}) {
+export default function Invitation({ invitation }) {
   return (
     <div className="w-full h-[500px] p-4 box-border">
       <div

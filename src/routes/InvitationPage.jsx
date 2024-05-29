@@ -12,7 +12,7 @@ import TabList from "../components/tabList/TabList";
 export default function InvitationPage() {
   const { id } = useParams();
   const [invitation, setInvitation] = useState(null);
-
+  const [websiteMode, setWebsiteMode] = useState(false);
   useEffect(() => {
     console.log(id);
     axios
@@ -26,15 +26,24 @@ export default function InvitationPage() {
   }
 
   return (
-    <>
-      <Home invitation={invitation}></Home>
-      <Invitation invitation={invitation}></Invitation>
-      <Location invitation={invitation}></Location>
-      <Gallery invitation={invitation}></Gallery>
-      <Contact />
-      <GuestBook />
-      <WeddingGift />
-      <TabList />
-    </>
+    <div className=" max-w-[450px] mx-auto bg-white">
+      <Home
+        invitation={invitation}
+        websiteMode={websiteMode}
+        setWebsiteMode={setWebsiteMode}
+      ></Home>
+
+      {websiteMode ? (
+        <>
+          <Invitation invitation={invitation}></Invitation>
+          <Location invitation={invitation}></Location>
+          <Gallery invitation={invitation}></Gallery>
+          <Contact />
+          <GuestBook />
+          <WeddingGift />
+          <TabList />
+        </>
+      ) : null}
+    </div>
   );
 }

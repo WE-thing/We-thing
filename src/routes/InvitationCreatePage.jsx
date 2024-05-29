@@ -12,8 +12,8 @@ function CreatePage() {
     galleryImageUrl: "",
     themeId: "",
     mainPhoto: "",
-    person1:"",
-    person2:""
+    person1: "",
+    person2: "",
   });
   const navigate = useNavigate();
 
@@ -30,14 +30,22 @@ function CreatePage() {
     // galleryImageUrl을 쉼표로 구분된 문자열에서 배열로 변환
     const updatedFormData = {
       ...formData,
-      themeId:parseInt(formData.themeId),
-      galleryImageUrl: formData.galleryImageUrl.split(',').map(url => url.trim())
+      themeId: parseInt(formData.themeId),
+      galleryImageUrl: formData.galleryImageUrl
+        .split(",")
+        .map((url) => url.trim()),
     };
 
     axios
       .post("http://localhost:3000/api/invitations", updatedFormData)
-      .then(() => {alert("제출완");navigate("/")})
-      .catch((error) => {alert("Error creating invitation");console.error("Error creating invitation:", updatedFormData)});
+      .then(() => {
+        alert("제출완");
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("Error creating invitation");
+        console.error("Error creating invitation:", updatedFormData);
+      });
   };
 
   return (
