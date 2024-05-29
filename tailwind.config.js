@@ -77,6 +77,7 @@ export default {
         theme1: {
           primary: "#F6F4EE",
           invitation: "#E8EADB",
+          album: "#9E9C95",
           pink: "#F5B9B1",
           red: "#BE5B46",
         },
