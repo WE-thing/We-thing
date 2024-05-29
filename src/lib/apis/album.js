@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
-export async function getAlbumList({userId}) {
-    const resp = await axios.get(`api/album/${userId}`);
-    return resp.data;
+export async function getAlbumList({ userId }) {
+  const resp = await axios.get(`/api/album/${userId}`);
+  return resp.data;
 }
 
 export async function postAlbum({userId, formData}) {

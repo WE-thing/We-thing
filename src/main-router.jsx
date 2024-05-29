@@ -1,11 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomePage from "./routes/page";
+import MainPage from "./routes/MainPage";
+import InvitationCreatePage from "./routes/InvitationCreatePage";
+import InvitationPage from "./routes/InvitationPage";
 
 export const routerObj = [
   {
     path: "/",
-    element: <HomePage />,
-    index: true,
+    element: <MainPage />,
+  },
+  {
+    path: "/create",
+    element: <InvitationCreatePage />,
+  },
+  {
+    path: "/invitations/:id",
+    element: <InvitationPage />,
   },
 ];
 

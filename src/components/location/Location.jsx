@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineContentCopy } from "react-icons/md";
 
-export default function Location() {
+export default function Location({ invitation }) {
+  const [isCopied, setIsCopied] = useState(false);
+  const [animationClass, setAnimationClass] = useState("");
+
   const copyToClipboard = async (text) => {
     await navigator.clipboard.writeText(text);
+    setAnimationClass("animate-fadeIn");
+    if (isCopied) return;
+    setIsCopied(true);
+
+    setTimeout(() => {
+      setAnimationClass("animate-fadeOut");
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 0); // fadeOut 애니메이션 지속 시간과 동일하게 설정
+    }, 1000); // 모달 표시 시간
   };
 
-  const address = "서울시 강남구 논현로 740";
-  const phone = "02-2278-9977";
-
   return (
-    <div className="flex flex-col items-center p-8 bg-white pt-10 pt-16 pb-16">
-      <p className="text-heading2 text-theme1-black  text-darkGray font-continuous mt-5">
+    <div className="flex flex-col items-center p-8 bg-white pt-10 pb-16">
+      <p className="text-heading2 text-theme1-black text-darkGray font-nanum mt-5">
         Location
       </p>
       <img
@@ -21,29 +31,41 @@ export default function Location() {
       />
 
       <div className="text-center font-nanum text-subheading mb-2">
-        아펠가모 광화문 B2 로스타노홀
+        {invitation.locationName}
         <br />
         <div className="mt-3">
           <span className="flex justify-center text-body1 items-center">
-            {address}
+            {invitation.locationAddress}
             <MdOutlineContentCopy
               className="ml-2 cursor-pointer"
               style={{ color: "#848484" }}
-              onClick={() => copyToClipboard(phone)}
+              onClick={() => {
+                copyToClipboard(invitation.locationAddress);
+              }}
             />
           </span>
         </div>
         <div className="text-center font-nanum text-body1">
-          <span className="flex justify-center itext-body items-center">
-            {phone}
+          <span className="flex justify-center text-body1 items-center">
+            {invitation.locationContact}
             <MdOutlineContentCopy
               className="ml-2 cursor-pointer"
               style={{ color: "#848484" }}
-              onClick={() => copyToClipboard(phone)}
+              onClick={() => {
+                copyToClipboard(invitation.locationContact);
+              }}
             />
           </span>
         </div>
       </div>
+
+      {isCopied && (
+        <div
+          className={`fixed w-[80%] bottom-4 mx-auto transform  bg-black text-white text-center py-2 px-4 rounded ${animationClass}`}
+        >
+          복사되었습니다.
+        </div>
+      )}
     </div>
   );
 }
