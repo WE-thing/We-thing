@@ -16,7 +16,7 @@ export default function InvitationPage() {
   useEffect(() => {
     console.log(id);
     axios
-      .get(`http://localhost:3000/api/invitations/${id}`)
+      .get(`/api/invitations/${id}`)
       .then((response) => setInvitation(response.data))
       .catch((error) => console.error("Error fetching invitation:", error));
   }, [id]);

@@ -37,7 +37,7 @@ function CreatePage() {
     };
 
     axios
-      .post("http://localhost:3000/api/invitations", updatedFormData)
+      .post("/api/invitations", updatedFormData)
       .then(() => {
         alert("제출완");
         navigate("/");
