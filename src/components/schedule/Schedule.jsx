@@ -7,9 +7,9 @@ export default function Schedule() {
   useEffect(() => {
     // 로컬 테스트 데이터를 설정
     setScheduleList([
-      { sTime: "12:00", eTime: "13:00", todo: "일정1" },
-      { sTime: "13:00", eTime: "14:00", todo: "일정2" },
-      { sTime: "14:00", eTime: "15:00", todo: "일정3" },
+      { sTime: "12:00", eTime: "13:00", todo: "손님 맞이" },
+      { sTime: "13:00", eTime: "14:00", todo: "본식 진행" },
+      { sTime: "14:00", eTime: "15:00", todo: "식사 시간" },
     ]);
   }, []);
 
