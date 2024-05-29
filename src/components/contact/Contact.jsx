@@ -40,6 +40,7 @@ export default function Contact() {
   const handleMailClick = (phoneNumber) => {
     window.location.href = `sms:${phoneNumber}`;
   };
+
   return (
     <div className=" w-full h-[300px] p-4 box-border bg-lightGray">
       <div className="mt-8 text-heading2 text-theme1-black font-continuous flex items-center justify-center">
