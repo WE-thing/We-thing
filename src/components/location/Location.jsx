@@ -20,7 +20,7 @@ export default function Location({ invitation }) {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 bg-white pt-10 pb-16">
+    <div className="flex w-100 flex-col items-center p-8 bg-white pt-10 pb-16">
       <p className="text-heading2 text-theme1-black text-darkGray font-nanum mt-5">
         Location
       </p>
@@ -61,7 +61,7 @@ export default function Location({ invitation }) {
 
       {isCopied && (
         <div
-          className={`fixed w-[80%] bottom-4 mx-auto transform  bg-black text-white text-center py-2 px-4 rounded ${animationClass}`}
+          className={`fixed w-90 bottom-4 mx-auto transform bg-black text-white text-center py-2 px-4 rounded ${animationClass}`}
         >
           복사되었습니다.
         </div>
