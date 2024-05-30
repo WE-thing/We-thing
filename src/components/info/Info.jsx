@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PiLineVerticalThin } from "react-icons/pi";
 import useAuth from "../../hook/useAuth";
 
@@ -8,35 +8,52 @@ export default function Info() {
   //로그인 여부 확인(토큰)
   const { token, handleShow, LoginModal, setToken } = useAuth();
 
+  const [userData, setUserData] = useState([]);
+
   //로그인 돼있을 시 화면 띄우고
   //아니면 폼 화면 띄우기
 
+  // 초기 토큰 설정
   useEffect(() => {
-    console.log("토큰: ",token);
-    if (!token) {
+    const storedToken = window.localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
       handleShow();
     }
   }, []);
-  
+
   useEffect(() => {
-    const callUserData = async() => {
-      setToken(window.localStorage.getItem("token"));
-      let data;
-      if(token) data = await getInfo({token:token});
+    setToken(window.localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    const callUserData = async () => {
+      if (!token) return;
+      const data = await getInfo({ token: token });
+      setUserData([
+        { key: "name", value: data.name },
+        { key: "phoneNumber", value: data.phoneNumber },
+        { key: "relationshipString", value: data.relationshipString },
+        { key: "attend", value: data.attend },
+      ]);
     };
     callUserData();
-  },[ [window.localStorage.getItem("token")]]);
+  }, [token]);
 
   return (
-    //수정 예정 : 데이터 받아와서 map으로 표현하기
-  <div className="my-6 flex flex-row items-center justify-center">
     <div>
-      이름:
+      {userData.map((e, index) => (
+        <div
+          key={index}
+          className="my-6 flex flex-row items-center justify-center"
+        >
+          <div className="text-theme1-black font-nanum w-32 text-center">{e.key}</div>
+          <PiLineVerticalThin size={32} className="mx-8" />
+          <div className="text-theme1-black font-nanum w-32 text-center">{e.value}</div>
+        </div>
+      ))}
+      <LoginModal />
     </div>
-    <PiLineVerticalThin size={32} className="mx-8" />
-    <div>이름이에요</div>
-
-    <LoginModal />
-  </div>
-  )
+  );
 }

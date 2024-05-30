@@ -6,6 +6,5 @@ export async function getInfo({token}) {
             'authorization': token,
         }
     });
-    console.log(resp);
-    return resp;
+    return resp.data;
 }
