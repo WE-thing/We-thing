@@ -59,8 +59,10 @@ jobs:
             # Navigate to the application directory
             cd /home/ubuntu/wething-frontend
             # Install project dependencies
-            npm install
+            sh ./deploy.sh
+            
+            # npm install
             # Restart or start the application with pm2
-            pm2 stop frontend
-            pm2 delete frontend
-            pm2 start "npm run dev" --name frontend
+            # pm2 stop frontend
+            # pm2 delete frontend
+            # pm2 start "npm run dev" --name frontend
