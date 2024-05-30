@@ -25,7 +25,7 @@ export default function Location({ invitation }) {
         Location
       </p>
       <img
-        src="/public/assets/images/map.png"
+        src="/assets/images/map.png"
         alt="오시는 길 지도"
         className="w-full h-auto mb-6 mt-9"
       />
