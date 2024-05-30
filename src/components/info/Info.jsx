@@ -31,15 +31,14 @@ export default function Info() {
     const callUserData = async () => {
       if (!token) return;
       const data = await getInfo({ token: token });
-      if(data.isMain) {
+      if (data.isMain) {
         setUserData([
           { key: "이름", value: data.name },
           { key: "전화번호", value: data.phoneNumber },
           { key: "초대/관계", value: data.relationshipString },
-          { key: "초대받은 인원", value: data.userCnt+"명" },
+          { key: "초대받은 인원", value: data.userCnt + "명" },
         ]);
-      }
-      else {
+      } else {
         setUserData([
           { key: "이름", value: data.name },
           { key: "전화번호", value: data.phoneNumber },
@@ -47,7 +46,6 @@ export default function Info() {
           { key: "참석 의사", value: data.attend },
         ]);
       }
-      
     };
     callUserData();
   }, [token]);
@@ -64,8 +62,14 @@ export default function Info() {
               {e.key}
             </div>
             <PiLineVerticalThin size={32} className="mx-8" />
-            <div className="text-theme1-black font-nanum w-32 text-center">
-              {e.value}
+            <div className="flex items-center">
+              <div className="text-theme1-black font-nanum w-32 text-center">
+                {e.value}
+              </div>
+              {index ===userData.length - 1 ? (
+                <button className="rounded-full bg-theme1-pink font-nanum text-white" style={{width: "40px"}}>수정</button>
+              ) : 
+              <div style={{width : "40px"}}/>}
             </div>
           </div>
         ))}
