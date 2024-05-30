@@ -55,7 +55,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
           width: "100%",
           height: "100vh",
         }}
-        className={`opacity-50 bg-[url(/src/assets/images/weddingphoto6.jpeg)]`}
+        className={`opacity-50 bg-[url(/public/assets/images/weddingphoto6.jpeg)]`}
       ></div>
       <div
         style={{
@@ -113,7 +113,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
       >
         <img
           className="w-full max-h-[60%] object-cover box-border block"
-          src="/src/assets/images/weddingphoto6.jpeg"
+          src="/public/assets/images/weddingphoto6.jpeg"
           alt="Wedding"
         />
         <div className="my-auto mx-auto">
@@ -142,7 +142,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
         </div>
         <img
           className="absolute block top-0 left-0 m-[15px] w-[calc(100%-30px)] h-[calc(100%-30px)]"
-          src="/src/assets/images/home-frame.png"
+          src="/public/assets/images/home-frame.png"
           alt="데코레이션"
         />
       </div>

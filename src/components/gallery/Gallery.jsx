@@ -9,15 +9,15 @@ export default function Gallery({ invitation }) {
       </p>
       <AlbumPhotos
         picUrls={[
-          "/src/assets/images/weddingphoto1.jpeg",
-          "/src/assets/images/weddingphoto2.jpeg",
-          "/src/assets/images/weddingphoto3.jpeg",
-          "/src/assets/images/weddingphoto4.jpeg",
-          "/src/assets/images/weddingphoto5.jpeg",
-          "/src/assets/images/weddingphoto6.jpeg",
-          "/src/assets/images/weddingphoto7.jpeg",
-          "/src/assets/images/weddingphoto8.jpeg",
-          "/src/assets/images/weddingphoto1.jpeg",
+          "/public/assets/images/weddingphoto1.jpeg",
+          "/public/assets/images/weddingphoto2.jpeg",
+          "/public/assets/images/weddingphoto3.jpeg",
+          "/public/assets/images/weddingphoto4.jpeg",
+          "/public/assets/images/weddingphoto5.jpeg",
+          "/public/assets/images/weddingphoto6.jpeg",
+          "/public/assets/images/weddingphoto7.jpeg",
+          "/public/assets/images/weddingphoto8.jpeg",
+          "/public/assets/images/weddingphoto1.jpeg",
         ]}
         start={1}
         end={9}
