@@ -1,6 +1,11 @@
 import axios from "axios";
 
-export async function getAlbumList({ userId }) {
-    const resp = await axios.get(`/api/info/${userId}`);
-    return resp.data;
+export async function getInfo({token}) {
+    const resp = await axios.get('/api/info', {
+        headers: {
+            'authorization': token,
+        }
+    });
+    console.log(resp);
+    return resp;
 }
