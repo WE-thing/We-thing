@@ -44,7 +44,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
   }, []);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-100 h-full">
       <div
         style={{
           backgroundSize: "cover",
@@ -68,7 +68,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
         }}
         className={`${
           websiteMode ? "opacity-100 " : "opacity-0"
-        } transition-all ease-in duration-2000`}
+        } transition-all ease-in duration-`}
       ></div>
       <div
         style={{

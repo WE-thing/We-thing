@@ -38,9 +38,9 @@ function CreatePage() {
 
     axios
       .post("/api/invitations", updatedFormData)
-      .then(() => {
-        alert("제출완");
-        navigate("/");
+      .then((response) => {
+        alert(`Invitation created successfully with ID : ${response.data._id}`);
+        navigate(`/invitations/${response.data._id}`);
       })
       .catch((error) => {
         alert("Error creating invitation");
@@ -49,7 +49,7 @@ function CreatePage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
+    <div className="max-w-md bg-white p-10 mx-auto shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold mb-5">Create Invitation</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -174,7 +174,7 @@ function CreatePage() {
         </div>
         <button
           type="submit"
-          className="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full inline-flex justify-center py-2 px-4 shadow-sm text-sm font-medium rounded-md text-gray bg-theme1-primary hover:bg-theme1-pink hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           Create
         </button>
