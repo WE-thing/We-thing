@@ -42,18 +42,24 @@ export default function Info() {
   }, [token]);
 
   return (
-    <div>
-      {userData.map((e, index) => (
-        <div
-          key={index}
-          className="my-6 flex flex-row items-center justify-center"
-        >
-          <div className="text-theme1-black font-nanum w-32 text-center">{e.key}</div>
-          <PiLineVerticalThin size={32} className="mx-8" />
-          <div className="text-theme1-black font-nanum w-32 text-center">{e.value}</div>
-        </div>
-      ))}
-      <LoginModal />
+    <div className={`w-full overflow-y-auto`}>
+      <div className="w-full">
+        {userData.map((e, index) => (
+          <div
+            key={index}
+            className="my-6 flex flex-row items-center justify-center"
+          >
+            <div className="text-theme1-black font-nanum w-32 text-center">
+              {e.key}
+            </div>
+            <PiLineVerticalThin size={32} className="mx-8" />
+            <div className="text-theme1-black font-nanum w-32 text-center">
+              {e.value}
+            </div>
+          </div>
+        ))}
+        <LoginModal />
+      </div>
     </div>
   );
 }
