@@ -1,0 +1,68 @@
+name: Deploy to EC2 Front
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "21.7.3"
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Install dependencies
+        run: npm ci
+      # Build step removed since there is no build script
+
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_DNS }}
+          username: ${{ secrets.EC2_USER_NAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          source: "."
+          target: "/home/ubuntu/wething-frontend"
+
+      - name: Execute remote commands via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_DNS }}
+          username: ${{ secrets.EC2_USER_NAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Install Node.js and pm2 on Ubuntu
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+            nvm install 21.7.3
+            nvm use 21.7.3
+            npm install -g pm2
+            export PATH=$PATH:$(npm bin -g)
+            # Navigate to the application directory
+            cd /home/ubuntu/wething-frontend
+            # Install project dependencies
+            sh ./deploy.sh
+            
+            # npm install
+            # Restart or start the application with pm2
+            # pm2 stop frontend
+            # pm2 delete frontend
+            # pm2 start "npm run dev" --name frontend

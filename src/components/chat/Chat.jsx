@@ -7,7 +7,8 @@ import { getMessageList } from "../../lib/apis/chat";
 import ChatMessage from "./ChatMessage";
 import useAuth from "../../hook/useAuth";
 
-const socket = io.connect("http://localhost:3001", {
+// const socket = io.connect("http://localhost:3001", {
+const socket = io.connect("http://15.165.77.161:3001", {
   cors: { origin: "*" },
   autoConnect: true,
 });
@@ -54,7 +55,7 @@ export default function Chat() {
   }, []);
 
   return (
-    <div className="w-full h-full overflow-y-hidden">
+    <div className=" w-full h-full overflow-y-hidden">
       <div
         ref={messageListRef}
         className="w-full h-[calc(100vh-72px-56px)] overflow-y-auto"
@@ -63,7 +64,7 @@ export default function Chat() {
           <ChatMessage key={id} message={message} />
         ))}
       </div>
-      <div className="grid grid-cols-6 fixed bottom-0 left-0 right-0 h-14 bg-red-50 shadow-[rgba(0,0,15,0.1)_0px_0px_14px_0px]">
+      <div className=" max-w-[450px] mx-auto grid grid-cols-6 fixed bottom-0 left-0 right-0 h-14 bg-red-50 shadow-[rgba(0,0,15,0.1)_0px_0px_14px_0px]">
         <input
           type="text"
           ref={messageInputRef}
