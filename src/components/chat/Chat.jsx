@@ -7,7 +7,8 @@ import { getMessageList } from "../../lib/apis/chat";
 import ChatMessage from "./ChatMessage";
 import useAuth from "../../hook/useAuth";
 
-const socket = io.connect("http://localhost:3001", {
+// const socket = io.connect("http://localhost:3001", {
+const socket = io.connect("http://15.165.77.161:3001", {
   cors: { origin: "*" },
   autoConnect: true,
 });
