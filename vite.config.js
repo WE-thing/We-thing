@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       // "/api": "http://localhost:3000",
-      "/api": "http://172.31.6.51:3000",
+      "/api": "http://15.165.77.161:3000",
     },
   },
 });
