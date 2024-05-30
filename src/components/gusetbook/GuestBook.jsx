@@ -11,9 +11,9 @@ export default function GuestBook() {
     userName: "",
     phoneNumber: "",
     roleId: 3,
-    relationshipNumber: 1, //1신랑 2신부
+    relationshipNumber: "", //1신랑 2신부
     relationshipString: "",
-    attend: 1, // 1참석 2불참 3미정
+    attend: "", // 1참석 2불참 3미정
   });
 
   const handleFormSubmit = (data) => {
