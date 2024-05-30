@@ -20,11 +20,11 @@ export default function Schedule() {
           key={index}
           className="my-6 flex flex-row items-center justify-center"
         >
-          <div className="text-theme1-black font-nanum">
+          <div className="text-theme1-black font-nanum w-32 text-center">
             {e.sTime} : {e.eTime}
           </div>
           <PiLineVerticalThin size={32} className="mx-8" />
-          <div className="text-theme1-black font-nanum">{e.todo}</div>
+          <div className="text-theme1-black font-nanum w-32 text-center">{e.todo}</div>
         </div>
       ))}
     </div>

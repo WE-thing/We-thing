@@ -81,5 +81,6 @@ export default function useAuth() {
     handleShow,
     handleClose,
     LoginModal,
+    setToken,
   };
 }
