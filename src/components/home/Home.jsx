@@ -25,13 +25,16 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMoved, setIsMoved] = useState(false);
   const [marginTop, setMarginTop] = useState("20%");
+  const [marginBottom, setMarginBottom] = useState("10%");
 
   useEffect(() => {
     function handleResize() {
       if (window.innerHeight < window.innerWidth) {
         setMarginTop("10%");
+        setMarginBottom("5%");
       } else {
         setMarginTop("20%");
+        setMarginBottom("10%");
       }
     }
 
@@ -116,10 +119,10 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
         <div className="my-auto mx-auto">
           <div
             className="flex justify-around w-[300px] mb-[10%] mx-auto"
-            style={{ marginTop }}
+            style={{ marginTop, marginBottom }}
           >
             <div className="font-nanum text-heading3 my-auto text-center">
-              고우림
+              {invitation.person1}
             </div>
             <div className="font-nanum text-heading3 text-center w-[30px]">
               {invitation.weddingDateTime.slice(4, 6)}
@@ -127,7 +130,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
               {invitation.weddingDateTime.slice(6, 8)}
             </div>
             <div className="font-nanum text-heading3 my-auto text-center">
-              김연아
+              {invitation.person2}
             </div>
           </div>
           <p className="font-nanum text-body2 text-center">
