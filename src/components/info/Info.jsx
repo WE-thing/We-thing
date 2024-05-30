@@ -31,12 +31,23 @@ export default function Info() {
     const callUserData = async () => {
       if (!token) return;
       const data = await getInfo({ token: token });
-      setUserData([
-        { key: "이름", value: data.name },
-        { key: "전화번호", value: data.phoneNumber },
-        { key: "초대/관계", value: data.relationshipString },
-        { key: "참석 의사", value: data.attend },
-      ]);
+      if(data.isMain) {
+        setUserData([
+          { key: "이름", value: data.name },
+          { key: "전화번호", value: data.phoneNumber },
+          { key: "초대/관계", value: data.relationshipString },
+          { key: "초대받은 인원", value: data.userCnt+"명" },
+        ]);
+      }
+      else {
+        setUserData([
+          { key: "이름", value: data.name },
+          { key: "전화번호", value: data.phoneNumber },
+          { key: "초대/관계", value: data.relationshipString },
+          { key: "참석 의사", value: data.attend },
+        ]);
+      }
+      
     };
     callUserData();
   }, [token]);
