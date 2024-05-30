@@ -63,4 +63,4 @@ jobs:
             # Restart or start the application with pm2
             # pm2 stop frontend
             # pm2 delete frontend
-            pm2 start bin/www --name frontend
+            pm2 start --name frontend start npm --start
