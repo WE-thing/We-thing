@@ -19,7 +19,7 @@ export default function AlbumPhotos({ picUrls, start, end }) {
   }
 
   return (
-    <div className="photos-container p-3">
+    <div className="photos-container p-3 py-2">
       {rows.map((row, rowIndex) => (
         <div
           key={rowIndex}
