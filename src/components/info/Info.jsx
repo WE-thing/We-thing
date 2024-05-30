@@ -32,10 +32,10 @@ export default function Info() {
       if (!token) return;
       const data = await getInfo({ token: token });
       setUserData([
-        { key: "name", value: data.name },
-        { key: "phoneNumber", value: data.phoneNumber },
-        { key: "relationshipString", value: data.relationshipString },
-        { key: "attend", value: data.attend },
+        { key: "이름", value: data.name },
+        { key: "전화번호", value: data.phoneNumber },
+        { key: "초대/관계", value: data.relationshipString },
+        { key: "참석 의사", value: data.attend },
       ]);
     };
     callUserData();
