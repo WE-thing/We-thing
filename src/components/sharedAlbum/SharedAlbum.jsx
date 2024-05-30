@@ -51,7 +51,7 @@ export default function SharedAlbum() {
     const imgFolder = zip.folder("images");
 
     const fetchImage = async (url) => {
-      const response = await getImage({url});
+      const response = await getImage({ url });
       return response;
     };
 

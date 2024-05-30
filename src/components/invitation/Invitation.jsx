@@ -6,7 +6,7 @@ export default function Invitation({ invitation }) {
       <div
         className="w-full h-full bg-theme1-invitation flex justify-center"
         style={{
-          backgroundImage: 'url("/src/assets/images/invitation-frame.png")',
+          backgroundImage: 'url("/public/assets/images/invitation-frame.png")',
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

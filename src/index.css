@@ -38,7 +38,7 @@
 
   @font-face {
     font-family: "Continuous";
-    src: url("/src/assets/font/continuous.otf") format("opentype");
+    src: url("/public/assets/font/continuous.otf") format("opentype");
   }
 }
 /* :root {

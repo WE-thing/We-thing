@@ -148,7 +148,7 @@ export default function GuestBookBefore({
               text-sm
               shadow-sm
               placeholder-slate-400
-              mb-2
+              
              "
               value={localFormData.phoneNumber}
               onChange={handleChange}
