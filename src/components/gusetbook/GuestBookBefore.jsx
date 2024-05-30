@@ -17,12 +17,37 @@ export default function GuestBookBefore({
     attend: formData.attend, // 1참석 2불참 3미정
   });
 
+  useEffect(() => {
+    // formData가 변경될 때마다 localFormData 업데이트
+    setLocalFormData({
+      id: formData.id,
+      userName: formData.userName,
+      phoneNumber: formData.phoneNumber,
+      roleId: 3,
+      relationshipNumber: formData.relationshipNumber,
+      relationshipString: formData.relationshipString,
+      attend: formData.attend,
+    });
+  }, [formData]);
+
   const handleSubmit = async () => {
+    if (
+      !localFormData.userName ||
+      !localFormData.phoneNumber ||
+      !localFormData.relationshipString ||
+      !localFormData.relationshipNumber ||
+      !localFormData.attend
+    ) {
+      alert("모든 필드를 입력해 주세요.");
+      return;
+    }
+
     try {
       await axios.post("/api/user/signup", localFormData);
       onFormSubmit(localFormData);
     } catch (error) {
-      console.log("Error: ", error);
+      console.log("Error: ", error.response.data);
+      alert(error.response.data.message);
     }
   };
 
@@ -33,6 +58,17 @@ export default function GuestBookBefore({
   };
 
   const handleUpdate = async () => {
+    if (
+      !localFormData.userName ||
+      !localFormData.phoneNumber ||
+      !localFormData.relationshipString ||
+      !localFormData.relationshipNumber ||
+      !localFormData.attend
+    ) {
+      alert("모든 필드를 입력해 주세요.");
+      return;
+    }
+
     try {
       await axios.put(`/api/user/${localFormData.id}`, localFormData);
 
@@ -51,9 +87,9 @@ export default function GuestBookBefore({
             class="peer/sinlang"
             type="radio"
             name="relationshipNumber"
-            defaultChecked
             value={1}
             onChange={handleChange}
+            checked={localFormData.relationshipNumber == 1 ? true : false}
           />
           <label for="sinlang" class="peer-checked/sinlang: ml-2">
             신랑측 손님
@@ -67,6 +103,7 @@ export default function GuestBookBefore({
             name="relationshipNumber"
             value={2}
             onChange={handleChange}
+            checked={localFormData.relationshipNumber == 2 ? true : false}
           />
           <label for="sinbu" class="peer-checked/sinbu: ml-2">
             신부측 손님
@@ -143,9 +180,9 @@ export default function GuestBookBefore({
             class="peer/ans1"
             type="radio"
             name="attend"
-            defaultChecked
             value={1}
             onChange={handleChange}
+            checked={localFormData.attend == 1 ? true : false}
           />
           <label for="ans1" class="peer-checked/ans1: ml-2">
             참석합니다.
@@ -159,6 +196,7 @@ export default function GuestBookBefore({
             name="attend"
             value={2}
             onChange={handleChange}
+            checked={localFormData.attend == 2 ? true : false}
           />
           <label for="ans2" class="peer-checked/ans2: ml-2">
             마음으로 함께하겠습니다.
@@ -172,6 +210,7 @@ export default function GuestBookBefore({
             name="attend"
             value={3}
             onChange={handleChange}
+            checked={localFormData.attend == 3 ? true : false}
           />
           <label for="ans3" class="peer-checked/ans3: ml-2">
             아직 정해지지 않았습니다.
@@ -191,7 +230,7 @@ export default function GuestBookBefore({
             className="mt-6 px-12 py-2 rounded-full bg-theme1-pink font-nanum text-white"
             onClick={handleUpdate}
           >
-            수정
+            완료
           </button>
         )}
       </div>
