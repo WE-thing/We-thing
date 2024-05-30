@@ -37,9 +37,7 @@ export default function TabList() {
         ))}
       </div>
 
-      <div
-        className={`w-full h-full min-h-[calc(100vh-72px)] overflow-y-scroll`}
-      >
+      <div className={`w-full h-[80vh] overflow-y-scroll`}>
         {renderContent()}
       </div>
     </div>

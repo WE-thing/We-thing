@@ -66,7 +66,7 @@ export default function SharedAlbum() {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", height: "100%", overflowY: "auto" }}>
       {/* 숨겨진 파일 입력 요소 */}
       <input
         type="file"

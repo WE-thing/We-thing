@@ -147,6 +147,7 @@ export default function GuestBookBefore({
               rounded-md
               text-sm
               shadow-sm
+              mb-2
               placeholder-slate-400
               
              "
@@ -167,6 +168,7 @@ export default function GuestBookBefore({
               rounded-md
               text-sm
               shadow-sm
+              mb-2
               placeholder-slate-400
              "
               value={localFormData.relationshipString}
