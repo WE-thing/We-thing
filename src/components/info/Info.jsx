@@ -31,29 +31,46 @@ export default function Info() {
     const callUserData = async () => {
       if (!token) return;
       const data = await getInfo({ token: token });
-      setUserData([
-        { key: "이름", value: data.name },
-        { key: "전화번호", value: data.phoneNumber },
-        { key: "초대/관계", value: data.relationshipString },
-        { key: "참석 의사", value: data.attend },
-      ]);
+      if(data.isMain) {
+        setUserData([
+          { key: "이름", value: data.name },
+          { key: "전화번호", value: data.phoneNumber },
+          { key: "초대/관계", value: data.relationshipString },
+          { key: "초대받은 인원", value: data.userCnt+"명" },
+        ]);
+      }
+      else {
+        setUserData([
+          { key: "이름", value: data.name },
+          { key: "전화번호", value: data.phoneNumber },
+          { key: "초대/관계", value: data.relationshipString },
+          { key: "참석 의사", value: data.attend },
+        ]);
+      }
+      
     };
     callUserData();
   }, [token]);
 
   return (
-    <div>
-      {userData.map((e, index) => (
-        <div
-          key={index}
-          className="my-6 flex flex-row items-center justify-center"
-        >
-          <div className="text-theme1-black font-nanum w-32 text-center">{e.key}</div>
-          <PiLineVerticalThin size={32} className="mx-8" />
-          <div className="text-theme1-black font-nanum w-32 text-center">{e.value}</div>
-        </div>
-      ))}
-      <LoginModal />
+    <div className={`w-full overflow-y-auto`}>
+      <div className="w-full">
+        {userData.map((e, index) => (
+          <div
+            key={index}
+            className="my-6 flex flex-row items-center justify-center"
+          >
+            <div className="text-theme1-black font-nanum w-32 text-center">
+              {e.key}
+            </div>
+            <PiLineVerticalThin size={32} className="mx-8" />
+            <div className="text-theme1-black font-nanum w-32 text-center">
+              {e.value}
+            </div>
+          </div>
+        ))}
+        <LoginModal />
+      </div>
     </div>
   );
 }

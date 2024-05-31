@@ -19,7 +19,13 @@ export default function AlbumPhotos({ picUrls, start, end }) {
   }
 
   return (
+<<<<<<< HEAD
     <div className="photos-container h-[100%] p-3">
+=======
+
+    <div className="photos-container h-100 p-3">
+
+>>>>>>> 773dcd89d340a942660bc7dbfd7fd80398407e48
       {rows.map((row, rowIndex) => (
         <div
           key={rowIndex}
