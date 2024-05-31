@@ -81,7 +81,7 @@ export default function SharedAlbum() {
       </div>
       <div className="absolute bottom-[110px] right-5 z-51 bg-[rgba(255,255,255,0.7)] w-auto h-auto align-center justify-center flex rounded-full">
         <MdDownloadForOffline
-          onClick={handleUploadButtonClick}
+          onClick={handleDownloadButtonClick}
           style={{
             width: "44px",
             height: "44px",
