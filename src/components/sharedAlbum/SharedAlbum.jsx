@@ -56,7 +56,7 @@ export default function SharedAlbum() {
     };
 
     for (let url of photoList) {
-      const blob = await fetchImage(url);
+      const blob = await fetchImage(JSON.stringify(url));
       const filename = url.split("/").pop();
       imgFolder.file(filename, blob);
     }
