@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import GuestBookBefore from "./GuestBookBefore";
 import GuestBookAfter from "./GuestBookAfter";
+import useAuth from "../../hook/useAuth";
+import { getInfo } from "../../lib/apis/info";
 
 export default function GuestBook() {
+  const { token, setToken } = useAuth();
   const [formState, setFormState] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -15,6 +18,31 @@ export default function GuestBook() {
     relationshipString: "",
     attend: "", // 1참석 2불참 3미정
   });
+
+  useEffect(() => {
+    const storedToken = window.localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      setFormState(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const callUserData = async () => {
+      if (!token) return;
+      setFormData(true);
+      const data = await getInfo({ token: token });
+      setFormData({
+        userName: data.name,
+        phoneNumber: data.phoneNumber,
+        relationshipNumber: data.relationshipNumber,
+        relationshipString: data.relationshipString,
+        attend: data.attend,
+      });
+      setIsSubmitted(true);
+    };
+    callUserData();
+  }, [token]);
 
   const handleFormSubmit = (data) => {
     setFormData(data);

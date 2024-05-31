@@ -70,7 +70,10 @@ export default function GuestBookBefore({
     }
 
     try {
-      await axios.put(`/api/user/${localFormData.id}`, localFormData);
+      await axios.put(
+        `/api/user/${localFormData.name}/${localFormData.phoneNumber}`,
+        localFormData
+      );
 
       onEdit(localFormData);
       onFormSubmit(localFormData);
