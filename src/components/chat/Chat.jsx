@@ -56,15 +56,12 @@ export default function Chat() {
 
   return (
     <div className=" w-full relative h-100 overflow-y-hidden">
-      <div
-        ref={messageListRef}
-        className="w-full h-100 first-letter:overflow-y-auto"
-      >
+      <div ref={messageListRef} className="w-full h-100 overflow-y-auto">
         {messageList.map((message, id) => (
           <ChatMessage key={id} message={message} />
         ))}
       </div>
-      <div className=" w-100 mx-auto absolute grid grid-cols-6 bottom-0 h-14 bg-red-50 shadow-[rgba(0,0,15,0.1)_0px_0px_14px_0px]">
+      <div className=" w-100 mx-auto absolute bottom-0 grid grid-cols-6 bottom-0 h-14 bg-red-50 shadow-[rgba(0,0,15,0.1)_0px_0px_14px_0px]">
         <input
           type="text"
           ref={messageInputRef}

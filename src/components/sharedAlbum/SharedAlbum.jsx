@@ -3,9 +3,9 @@ import AlbumPhotos from "../../lib/modules/AlbumPhotos";
 // api 요청은 "../../lib/apis"에서 불러올 거에요 !
 import { getAlbumList, postAlbum, getImage } from "../../lib/apis/album";
 import { HiPlusCircle } from "react-icons/hi2";
-import { MdDownloadForOffline } from "react-icons/md";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
+import { MdDownload, MdDownloadForOffline } from "react-icons/md";
 
 export default function SharedAlbum() {
   const [photoList, setPhotoList] = useState([]);
@@ -66,7 +66,7 @@ export default function SharedAlbum() {
   };
 
   return (
-    <div style={{ position: "relative", height: "100%", overflowY: "auto" }}>
+    <div className="relative h-100 overflow-hidden">
       {/* 숨겨진 파일 입력 요소 */}
       <input
         type="file"
@@ -76,17 +76,31 @@ export default function SharedAlbum() {
         accept="image/*"
         onChange={handleFileChange}
       />
-      <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
-      <MdDownloadForOffline
-        onClick={handleDownloadButtonClick}
-        className={`absolute bottom-20 right-5 z-50`}
-        style={{ width: "44px", height: "44px", color: "#9E9C95" }}
-      />
-      <HiPlusCircle
-        onClick={handleUploadButtonClick}
-        className={`absolute bottom-5 right-5 z-50`}
-        style={{ width: "44px", height: "44px", color: "#9E9C95" }}
-      />
+      <div className="h-100 overflow-y-auto">
+        <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
+      </div>
+      <div className="absolute bottom-[110px] right-5 z-51 bg-[rgba(255,255,255,0.7)] w-auto h-auto align-center justify-center flex rounded-full">
+        <MdDownloadForOffline
+          onClick={handleUploadButtonClick}
+          style={{
+            width: "44px",
+            height: "44px",
+            color: "rgba(200,200,200,0.9)",
+            scale: "1.2",
+          }}
+        />
+      </div>
+      <div className="absolute bottom-[45px] right-5 z-51 bg-[rgba(255,255,255,0.7)] w-auto h-auto align-center justify-center flex rounded-full ">
+        <HiPlusCircle
+          onClick={handleUploadButtonClick}
+          style={{
+            width: "44px",
+            height: "44px",
+            color: "rgba(200,200,200,0.9)",
+            scale: "1.2",
+          }}
+        />
+      </div>
     </div>
   );
 }
