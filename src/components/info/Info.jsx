@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PiLineVerticalThin } from "react-icons/pi";
 import useAuth from "../../hook/useAuth";
 
 import { getInfo } from "../../lib/apis/info";
 
-export default function Info() {
+export default function Info({ scrollToGuestBook }) {
   //로그인 여부 확인(토큰)
   const { token, handleShow, LoginModal, setToken } = useAuth();
 
@@ -65,10 +65,17 @@ export default function Info() {
               <div className="text-theme1-black font-nanum w-32 text-center">
                 {e.value}
               </div>
-              {index ===userData.length - 1 ? (
-                <button className="rounded-full bg-theme1-pink font-nanum text-white" style={{width: "40px"}}>수정</button>
-              ) : 
-              <div style={{width : "40px"}}/>}
+              {index === userData.length - 1 ? (
+                <button
+                  className="rounded-full bg-theme1-pink font-nanum text-white"
+                  style={{ width: "40px" }}
+                  onClick={scrollToGuestBook}
+                >
+                  수정
+                </button>
+              ) : (
+                <div style={{ width: "40px" }} />
+              )}
             </div>
           </div>
         ))}
