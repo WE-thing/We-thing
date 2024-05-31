@@ -11,14 +11,20 @@ const tabs = [
   { id: "profile", label: "내 정보", component: Info },
 ];
 
-export default function TabList() {
+export default function TabList({ scrollToGuestBook }) {
   const [activeTab, setActiveTab] = useState("albums");
 
   const renderContent = () => {
     const activeTabComponent = tabs.find(
       (tab) => tab.id === activeTab
     )?.component;
-    return activeTabComponent ? React.createElement(activeTabComponent) : null;
+
+    // Info 컴포넌트에만 scrollToGuestBook 함수를 props로 전달
+    if (activeTab === "profile") {
+      return <Info scrollToGuestBook={scrollToGuestBook} />;
+    } else {
+      return React.createElement(activeTabComponent);
+    }
   };
 
   return (
@@ -37,7 +43,7 @@ export default function TabList() {
         ))}
       </div>
 
-      <div className={`w-full h-full max-h-[80vh] overflow-y-scroll`}>
+      <div className={`w-full h-[80vh] overflow-y-hidden`}>
         {renderContent()}
       </div>
     </div>

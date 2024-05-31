@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Home from "../components/home/Home";
@@ -13,6 +13,7 @@ export default function InvitationPage() {
   const { id } = useParams();
   const [invitation, setInvitation] = useState(null);
   const [websiteMode, setWebsiteMode] = useState(false);
+  const guestBookRef = useRef(null);
   useEffect(() => {
     console.log(id);
     axios
@@ -24,6 +25,13 @@ export default function InvitationPage() {
   if (!invitation) {
     return <div>Loading...</div>;
   }
+
+  const scrollToGuestBook = () => {
+    console.log(guestBookRef.current);
+    if (guestBookRef.current) {
+      guestBookRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <div className=" max-w-[450px] mx-auto bg-white">
@@ -39,9 +47,9 @@ export default function InvitationPage() {
           <Location invitation={invitation}></Location>
           <Gallery invitation={invitation}></Gallery>
           <Contact />
-          <GuestBook />
+          <GuestBook ref={guestBookRef}/>
           <WeddingGift />
-          <TabList />
+          <TabList scrollToGuestBook={scrollToGuestBook} />
         </>
       ) : null}
     </div>

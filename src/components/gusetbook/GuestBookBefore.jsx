@@ -70,7 +70,10 @@ export default function GuestBookBefore({
     }
 
     try {
-      await axios.put(`/api/user/${localFormData.id}`, localFormData);
+      await axios.put(
+        `/api/user/${localFormData.name}/${localFormData.phoneNumber}`,
+        localFormData
+      );
 
       onEdit(localFormData);
       onFormSubmit(localFormData);
@@ -147,6 +150,7 @@ export default function GuestBookBefore({
               rounded-md
               text-sm
               shadow-sm
+              mb-2
               placeholder-slate-400
               
              "
@@ -167,6 +171,7 @@ export default function GuestBookBefore({
               rounded-md
               text-sm
               shadow-sm
+              mb-2
               placeholder-slate-400
              "
               value={localFormData.relationshipString}
