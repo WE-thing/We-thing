@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import axios from "axios";
 import GuestBookBefore from "./GuestBookBefore";
 import GuestBookAfter from "./GuestBookAfter";
 import useAuth from "../../hook/useAuth";
 import { getInfo } from "../../lib/apis/info";
 
-export default function GuestBook() {
+const GuestBook = forwardRef((props, ref) => {
   const { token, setToken } = useAuth();
   const [formState, setFormState] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -56,7 +56,7 @@ export default function GuestBook() {
 
   return (
     <>
-      <div className="w-full h-[700px] p-4 box-border bg-white">
+      <div ref={ref} className="w-full h-[700px] p-4 box-border bg-white">
         <div className=" mt-8 text-heading2 text-theme1-black font-continuous flex items-center justify-center">
           GuestBook
         </div>
@@ -77,4 +77,6 @@ export default function GuestBook() {
       </div>
     </>
   );
-}
+})
+
+export default GuestBook;
