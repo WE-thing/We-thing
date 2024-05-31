@@ -8,6 +8,7 @@ export default function GuestBookAfter({ formData, onEdit }) {
           <p className="text-heading2">{formData.userName}</p>
           <p>{formData.phoneNumber}</p>
           <p>{formData.relationshipString}</p>
+          <p>{formData.relationshipNumber == 1 ? "신랑측" : "신부측"}</p>
           <p>
             {formData.attend == 1
               ? "참석합니다"

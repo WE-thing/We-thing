@@ -43,9 +43,7 @@ export default function TabList({ scrollToGuestBook }) {
         ))}
       </div>
 
-      <div
-        className={`w-full h-full max-h-[80vh] overflow-y-scroll`}
-      >
+      <div className={`w-full h-[80vh] overflow-y-hidden`}>
         {renderContent()}
       </div>
     </div>
