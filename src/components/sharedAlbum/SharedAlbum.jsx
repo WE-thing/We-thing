@@ -66,12 +66,7 @@ export default function SharedAlbum() {
   };
 
   return (
-<<<<<<< HEAD
     <div className="relative h-100 overflow-hidden">
-=======
-    <div style={{ position: "relative", height: "100%", overflowY: "auto" }}>
-
->>>>>>> 773dcd89d340a942660bc7dbfd7fd80398407e48
       {/* 숨겨진 파일 입력 요소 */}
       <input
         type="file"
@@ -81,7 +76,6 @@ export default function SharedAlbum() {
         accept="image/*"
         onChange={handleFileChange}
       />
-<<<<<<< HEAD
       <div className="h-100 overflow-y-auto">
         <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
       </div>
@@ -107,7 +101,6 @@ export default function SharedAlbum() {
           }}
         />
       </div>
-=======
       <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
       <MdDownloadForOffline
         onClick={handleDownloadButtonClick}
@@ -119,7 +112,6 @@ export default function SharedAlbum() {
         className={`sticky bottom-5 right-5 z-50`}
         style={{ width: "44px", height: "44px", color: "#9E9C95" }}
       />
->>>>>>> 773dcd89d340a942660bc7dbfd7fd80398407e48
     </div>
   );
 }
