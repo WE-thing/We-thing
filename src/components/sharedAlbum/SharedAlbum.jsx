@@ -67,6 +67,7 @@ export default function SharedAlbum() {
 
   return (
     <div style={{ position: "relative", height: "100%", overflowY: "auto" }}>
+
       {/* 숨겨진 파일 입력 요소 */}
       <input
         type="file"
@@ -79,12 +80,12 @@ export default function SharedAlbum() {
       <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
       <MdDownloadForOffline
         onClick={handleDownloadButtonClick}
-        className={`absolute bottom-20 right-5 z-50`}
+        className={`sticky bottom-20 right-5 z-50`}
         style={{ width: "44px", height: "44px", color: "#9E9C95" }}
       />
       <HiPlusCircle
         onClick={handleUploadButtonClick}
-        className={`absolute bottom-5 right-5 z-50`}
+        className={`sticky bottom-5 right-5 z-50`}
         style={{ width: "44px", height: "44px", color: "#9E9C95" }}
       />
     </div>
