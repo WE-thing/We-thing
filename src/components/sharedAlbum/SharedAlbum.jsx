@@ -101,17 +101,6 @@ export default function SharedAlbum() {
           }}
         />
       </div>
-      <AlbumPhotos picUrls={photoList} start={1} end={photoList.length} />
-      <MdDownloadForOffline
-        onClick={handleDownloadButtonClick}
-        className={`sticky bottom-20 right-5 z-50`}
-        style={{ width: "44px", height: "44px", color: "#9E9C95" }}
-      />
-      <HiPlusCircle
-        onClick={handleUploadButtonClick}
-        className={`sticky bottom-5 right-5 z-50`}
-        style={{ width: "44px", height: "44px", color: "#9E9C95" }}
-      />
     </div>
   );
 }

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+registerPlugin(FilePondPluginImagePreview);
 
 function CreatePage() {
   const [formData, setFormData] = useState({
@@ -9,12 +15,12 @@ function CreatePage() {
     locationName: "",
     locationAddress: "",
     locationContact: "",
-    galleryImageUrl: "",
     themeId: "",
-    mainPhoto: "",
     person1: "",
     person2: "",
   });
+  const [mainPhoto, setMainPhoto] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -24,28 +30,48 @@ function CreatePage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // galleryImageUrl을 쉼표로 구분된 문자열에서 배열로 변환
+    // Convert themeId to integer
     const updatedFormData = {
       ...formData,
       themeId: parseInt(formData.themeId),
-      galleryImageUrl: formData.galleryImageUrl
-        .split(",")
-        .map((url) => url.trim()),
     };
 
-    axios
-      .post("/api/invitations", updatedFormData)
-      .then((response) => {
-        alert(`Invitation created successfully with ID : ${response.data._id}`);
-        navigate(`/invitations/${response.data._id}`);
-      })
-      .catch((error) => {
-        alert("Error creating invitation");
-        console.error("Error creating invitation:", updatedFormData);
+    // Handle file uploads for mainPhoto and galleryImages
+    const mainPhotoFile = mainPhoto[0]?.file;
+    const galleryImageFiles = galleryImages.map((fileItem) => fileItem.file);
+
+    const formDataToSend = new FormData();
+    formDataToSend.append(
+      "inviteDescription",
+      updatedFormData.inviteDescription
+    );
+    formDataToSend.append("weddingDateTime", updatedFormData.weddingDateTime);
+    formDataToSend.append("locationName", updatedFormData.locationName);
+    formDataToSend.append("locationAddress", updatedFormData.locationAddress);
+    formDataToSend.append("locationContact", updatedFormData.locationContact);
+    formDataToSend.append("themeId", updatedFormData.themeId);
+    formDataToSend.append("person1", updatedFormData.person1);
+    formDataToSend.append("person2", updatedFormData.person2);
+    formDataToSend.append("mainPhoto", mainPhotoFile);
+    galleryImageFiles.forEach((file, index) => {
+      formDataToSend.append(`galleryImage${index}`, file);
+    });
+
+    try {
+      const response = await axios.post("/api/invitations", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
+      alert(`Invitation created successfully with ID: ${response.data._id}`);
+      navigate(`/invitations/${response.data._id}`);
+    } catch (error) {
+      alert("Error creating invitation");
+      console.error("Error creating invitation:", error);
+    }
   };
 
   return (
@@ -56,12 +82,12 @@ function CreatePage() {
           <label className="block text-sm font-medium text-gray-700">
             Description
           </label>
-          <input
-            type="text"
+          <textarea
             name="inviteDescription"
             value={formData.inviteDescription}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            rows="4"
           />
         </div>
         <div>
@@ -114,14 +140,27 @@ function CreatePage() {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Gallery Image URLs (comma separated)
+            Main Photo
           </label>
-          <input
-            type="text"
-            name="galleryImageUrl"
-            value={formData.galleryImageUrl}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          <FilePond
+            files={mainPhoto}
+            onupdatefiles={setMainPhoto}
+            allowMultiple={false}
+            acceptedFileTypes={["image/*"]}
+            labelIdle='Drag & Drop your main photo or <span class="filepond--label-action">Browse</span>'
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Gallery Images (up to 10)
+          </label>
+          <FilePond
+            files={galleryImages}
+            onupdatefiles={setGalleryImages}
+            allowMultiple={true}
+            maxFiles={10}
+            acceptedFileTypes={["image/*"]}
+            labelIdle='Drag & Drop your gallery images or <span class="filepond--label-action">Browse</span>'
           />
         </div>
         <div>
@@ -138,19 +177,7 @@ function CreatePage() {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Main Photo URL
-          </label>
-          <input
-            type="text"
-            name="mainPhoto"
-            value={formData.mainPhoto}
-            onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            person1(bride)
+            person1 (bride)
           </label>
           <input
             type="text"
@@ -162,7 +189,7 @@ function CreatePage() {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            person2(groom)
+            person2 (groom)
           </label>
           <input
             type="text"
