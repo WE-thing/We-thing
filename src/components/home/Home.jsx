@@ -29,7 +29,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
 
   useEffect(() => {
     function handleResize() {
-      if (window.innerHeight < window.innerWidth) {
+      if (900 > window.innerHeight) {
         setMarginTop("10%");
         setMarginBottom("5%");
       } else {
@@ -95,6 +95,7 @@ export default function Home({ invitation, websiteMode, setWebsiteMode }) {
           transform: "translate(-50%, calc(-50% + 40px)) scale(0.7)",
           boxShadow: "2px gray",
           zIndex: "20",
+          overflow: "hidden",
         }}
         onClick={() => {
           if (websiteMode) return;
