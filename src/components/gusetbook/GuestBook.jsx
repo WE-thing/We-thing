@@ -37,7 +37,7 @@ const GuestBook = forwardRef((props, ref) => {
         phoneNumber: data.phoneNumber,
         relationshipNumber: data.relationshipNumber,
         relationshipString: data.relationshipString,
-        attend: data.attend,
+        attend: data.attend == "참석" ? 1 : data.attend == "미정" ? 2 : 3,
       });
       setIsSubmitted(true);
     };
@@ -77,6 +77,6 @@ const GuestBook = forwardRef((props, ref) => {
       </div>
     </>
   );
-})
+});
 
 export default GuestBook;
