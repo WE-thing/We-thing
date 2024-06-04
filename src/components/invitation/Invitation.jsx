@@ -15,7 +15,7 @@ export default function Invitation({ invitation }) {
           <p className="font-continuous mt-[100px] text-heading2 text-darkGray mb-4">
             Invitation
           </p>
-          <p className="font-nanum text-body1 text-color-[#081609] mt-10 whitespace-pre-line">
+          <p className=" p-4 leading-6 font-nanum text-body1 text-color-[#081609] mt-10 whitespace-pre-line">
             {/* 서로가 마주보며 다져온 사랑을\n
             이제 함께 한 곳을 바라보며\n
             걸어갈 수 있는 큰 사랑으로 키우고자 합니다.\n

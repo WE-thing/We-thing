@@ -11,40 +11,49 @@ const tabs = [
   { id: "profile", label: "내 정보", component: Info },
 ];
 
+function TabButtons({ activeTab, setActiveTab }) {
+  return (
+    <div className="text-subheading text-theme1-black font-nanum h-[72px] grid grid-cols-4 text-center items-center bg-white">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          className={`w-full h-full flex justify-center items-center ${
+            activeTab === tab.id ? "font-bold bg-theme1-primary" : ""
+          }`}
+          onClick={() => setActiveTab(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TabContent({ activeTab, scrollToGuestBook }) {
+  const activeTabComponent = tabs.find(
+    (tab) => tab.id === activeTab
+  )?.component;
+  if (!activeTabComponent) return null;
+
+  // Info 컴포넌트에만 scrollToGuestBook 함수를 props로 전달
+  if (activeTab === "profile") {
+    return <Info scrollToGuestBook={scrollToGuestBook} />;
+  } else {
+    return React.createElement(activeTabComponent);
+  }
+}
+
 export default function TabList({ scrollToGuestBook }) {
   const [activeTab, setActiveTab] = useState("albums");
 
-  const renderContent = () => {
-    const activeTabComponent = tabs.find(
-      (tab) => tab.id === activeTab
-    )?.component;
-
-    // Info 컴포넌트에만 scrollToGuestBook 함수를 props로 전달
-    if (activeTab === "profile") {
-      return <Info scrollToGuestBook={scrollToGuestBook} />;
-    } else {
-      return React.createElement(activeTabComponent);
-    }
-  };
-
   return (
     <div>
-      <div className="text-subheading text-theme1-black font-nanum h-[72px] grid grid-cols-4 text-center items-center bg-white">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`w-full h-full flex justify-center items-center ${
-              activeTab === tab.id ? "font-bold bg-theme1-primary" : ""
-            }`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      <div className={`w-full h-[80vh] overflow-y-hidden`}>
-        {renderContent()}
+      <TabButtons activeTab={activeTab} setActiveTab={setActiveTab} />
+      <div className="w-full h-[80vh] overflow-y-hidden">
+        <TabContent
+          activeTab={activeTab}
+          scrollToGuestBook={scrollToGuestBook}
+        />
       </div>
     </div>
   );
