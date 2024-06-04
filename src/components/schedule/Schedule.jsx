@@ -60,10 +60,10 @@ export default function Schedule() {
       { sTime: "09:00", eTime: "10:00", todo: "손님 맞이" },
       { sTime: "10:00", eTime: "13:00", todo: "본식 진행" },
       { sTime: "13:00", eTime: "15:00", todo: "식사 시간" },
-      { sTime: "15:00", eTime: "16:00", todo: "2부 진행" },
-      { sTime: "16:00", eTime: "17:00", todo: "마무리" },
+      { sTime: "15:00", eTime: "17:00", todo: "2부 진행" },
+      { sTime: "17:00", eTime: "19:00", todo: "마무리" },
     ]);
-    setWeddingDateTime("202405311600");
+    setWeddingDateTime("202406041200");
   }, []);
 
   return (
